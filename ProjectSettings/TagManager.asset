@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - CO2
+  - MaleFlower
+  - FemaleFlower
   layers:
   - Default
   - TransparentFX

@@ -33,6 +33,16 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsInPollutedArea, IsResting;
 
+    public enum PollenState
+    {
+        COLLECTED,
+        DELIVERED,
+        NOT_COLLECTED
+    }
+
+    public PollenState PollenCollectionState;
+
+    Vector3 InitialPosition;
     void Awake()
     {
         if (instance == null)
@@ -48,16 +58,24 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        InitialPosition = transform.position;
+        Reset();
+    }
+
+    public void Reset()
+    {
         PlayerHorizontalDirection = Direction.RIGHT;
         PlayerVerticalDirection = Direction.DOWN;
         IsInPollutedArea = false;
-        IsResting = false;
+        IsResting = true;
+        PollenCollectionState = PollenState.NOT_COLLECTED;
+        transform.position = InitialPosition;
     }
 
     private void LateUpdate()
     {
         FlipPlayer();
-        //if(!IsResting)
+        if(!IsResting)
             MovePlayer();
         HasEnteredPollutedArea();
     }
@@ -114,14 +132,31 @@ public class PlayerMovement : MonoBehaviour
     public void ChangeVerticalDirection(bool isGoingUp)
     {
         PlayerVerticalDirection = isGoingUp ? Direction.UP : Direction.DOWN;
+        IsResting = isGoingUp ? false : IsResting;
     }
 
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.transform.tag == "Ground") {
-    //        IsResting = true;
-    //    }
-    //}
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.tag == "Ground")
+        {
+            IsResting = true;
+
+            if(PollenCollectionState == PollenState.DELIVERED)
+                GameManager.Instance.GrowForest();
+        }
+        if (collision.transform.tag == "MaleFlower")
+        {
+            PollenCollectionState = PollenState.COLLECTED;
+            collision.gameObject.SetActive(false);
+        }
+
+        if (collision.transform.tag == "FemaleFlower" && PollenCollectionState == PollenState.COLLECTED)
+        {
+            collision.gameObject.SetActive(false);
+            PollenCollectionState = PollenState.DELIVERED;
+//            GameManager.Instance.GrowForest();
+        }
+    }
 
     //private void OnCollisionExit2D(Collision2D collision)
     //{
