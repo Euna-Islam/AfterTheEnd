@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class PollutionGenerator : MonoBehaviour
 {
+    private static PollutionGenerator instance;
+    public static PollutionGenerator Instance { get { return instance; } }
+
     public GameObject PollutionBubble;
 
     public float BubbleMinRangeX;
@@ -11,13 +14,30 @@ public class PollutionGenerator : MonoBehaviour
     public List<GameObject> AllPollutions;
 
     int NextDeactivatePollution;
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
 
     private void Start()
     {
         GeneratePollution();
     }
 
-    void GeneratePollution() {
+    public void StopPollutionGeneration()
+    {
+        CancelInvoke("ActivatePollution");
+    }
+
+    public void GeneratePollution() {
         CancelInvoke("ActivatePollution");
         InvokeRepeating("ActivatePollution", 1f, 1f);
     }
