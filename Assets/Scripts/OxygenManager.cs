@@ -6,8 +6,10 @@ public class OxygenManager : MonoBehaviour
     private static OxygenManager instance;
     public static OxygenManager Instance { get { return instance; } }
 
-    public float OxygenLossRate = 0.0005f;
-    public float OxygenGainRate = 0.0005f;
+    public float OxygenLossRate;
+    public float OxygenGainRate;
+
+    public Image OxygenLevel;
     void Awake()
     {
         if (instance == null)
@@ -20,20 +22,16 @@ public class OxygenManager : MonoBehaviour
             Destroy(this);
         }
     }
-    public Image OxygenLevel;
-    private void Update()
-    {
-        UpdateOxygenIndicator();
-    }
 
     public void Reset()
     {
         OxygenLevel.fillAmount = 1;
+        CancelInvoke("UpdateOxygenIndicator");
+        InvokeRepeating("UpdateOxygenIndicator", 0.5f, 0.5f);
     }
 
     void UpdateOxygenIndicator()
     {
-        
         if (PlayerMovement.Instance.IsInPollutedArea)
             OxygenLevel.fillAmount -= OxygenLossRate;
         else OxygenLevel.fillAmount += OxygenGainRate;

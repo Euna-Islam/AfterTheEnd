@@ -56,12 +56,13 @@ public class PlayerMovement : MonoBehaviour
         {
             Destroy(this);
         }
+
+        InitialPosition = transform.position;
     }
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        InitialPosition = transform.position;
+        
         Reset();
     }
 

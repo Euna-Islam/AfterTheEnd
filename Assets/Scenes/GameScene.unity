@@ -1328,7 +1328,7 @@ MonoBehaviour:
   GameStartPanel: {fileID: 1904689253}
   GamePanel: {fileID: 1730956434}
   GameOverPanel: {fileID: 238468533}
-  GamePlayState: 0
+  GamePlayState: 1
 --- !u!114 &822998616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1355,6 +1355,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32322fe73ac3174ba7a272070a74e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OxygenLossRate: 0.09
+  OxygenGainRate: 0.05
   OxygenLevel: {fileID: 784183412}
 --- !u!1 &900486406
 GameObject:

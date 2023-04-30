@@ -38,8 +38,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        GamePlayState = GameState.PLAY;
-        TimerManager.Instance.StartTimer();
+        Play();
     }
     
     public void GrowForest()
@@ -83,7 +82,6 @@ public class GameManager : MonoBehaviour
         PlayerMovement.Instance.Reset();
         ResetGame();
         GamePlayState = GameState.PLAY;
-        GameStartPanel.SetActive(false);
         GameOverPanel.SetActive(false);
         GamePanel.SetActive(true);
         OxygenManager.Instance.Reset();
