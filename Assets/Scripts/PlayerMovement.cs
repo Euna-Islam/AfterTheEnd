@@ -33,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsInPollutedArea, IsResting;
 
+    Rigidbody2D rb;
+
     public enum PollenState
     {
         COLLECTED,
@@ -58,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         InitialPosition = transform.position;
         Reset();
     }
@@ -97,7 +100,10 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
         float nextPosY = PlayerVerticalDirection == Direction.DOWN ?
-            currentPos.y - DownwardDisplacement : currentPos.y + UpwardDisplacement;
+            currentPos.y - DownwardDisplacement : 
+            (IsInPollutedArea ? currentPos.y + UpwardDisplacement/2 : currentPos.y + UpwardDisplacement);
+
+        
         Vector2 nextPos = new Vector3(nextPosX, nextPosY);
 
         transform.position = Vector3.Lerp(currentPos, nextPos, Speed * Time.deltaTime);
@@ -106,9 +112,14 @@ public class PlayerMovement : MonoBehaviour
     void HasEnteredPollutedArea() {
 
         if (transform.position.y <= GameManager.Instance.PollutedAreaHeight)
+        {
             IsInPollutedArea = true;
-        else IsInPollutedArea = false;
+        }
+        else {
+            IsInPollutedArea = false;
+        }
     }
+
 
     void FlipPlayer() {
         switch (PlayerHorizontalDirection)
@@ -137,6 +148,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (!GameManager.Instance.IsGamePlaying())
+            return;
         if (collision.transform.tag == "Ground")
         {
             IsResting = true;

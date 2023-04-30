@@ -28,12 +28,15 @@ public class TimerManager : MonoBehaviour
         Reset();
     }
 
-    private void Reset()
+    public void Reset()
     {
+        TotalTime = 20;
         Timer.text = TotalTime + "s";
     }
 
     public void StartTimer() {
+        Reset();
+        CancelInvoke("ReduceTime");
         InvokeRepeating("ReduceTime", 1f, 1f);
     }
 

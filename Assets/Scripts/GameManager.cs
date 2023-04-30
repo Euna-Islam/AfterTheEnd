@@ -4,8 +4,6 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
-    public Image OxygenLevel;
-
     public float PollutedAreaHeight;
 
     public GameObject CarbonDiOxide, MaleFlower, FemaleFlower;
@@ -42,25 +40,7 @@ public class GameManager : MonoBehaviour
     {
         GamePlayState = GameState.START;
     }
-    private void Update()
-    {
-        UpdateOxygenIndicator();
-    }
-
-    void UpdateOxygenIndicator()
-    {
-        float oxygenLossRate = 0.0005f;
-        float oxygenGainRate = 0.0005f;
-        if (PlayerMovement.Instance.IsInPollutedArea)
-            OxygenLevel.fillAmount -= oxygenLossRate;
-        else OxygenLevel.fillAmount += oxygenGainRate;
-
-        if (GamePlayState == GameState.PLAY && OxygenLevel.fillAmount < .1)
-        {
-            GameOver();
-        }
-    }
-
+    
     public void GrowForest()
     {
         GrowFirstPart();
@@ -99,27 +79,24 @@ public class GameManager : MonoBehaviour
 
     public void Play()
     {
-        GamePlayState = GameState.PLAY;
         PlayerMovement.Instance.Reset();
+        ResetGame();
+        GamePlayState = GameState.PLAY;
         GameStartPanel.SetActive(false);
+        GameOverPanel.SetActive(false);
         GamePanel.SetActive(true);
-
+        OxygenManager.Instance.Reset();
         TimerManager.Instance.StartTimer();
     }
 
     public void Replay()
     {
-        PlayerMovement.Instance.Reset();
-        ResetGame();
-        GamePlayState = GameState.PLAY;
-        GameOverPanel.SetActive(false);
-        GamePanel.SetActive(true);
-
-        TimerManager.Instance.StartTimer();
+        Play();
     }
 
     public void GameOver()
     {
+        TimerManager.Instance.Reset();
         GamePlayState = GameState.GAMEOVER;
         GamePanel.SetActive(false);
         GameOverPanel.SetActive(true);
@@ -134,4 +111,7 @@ public class GameManager : MonoBehaviour
         FemaleFlower.SetActive(true);
     }
 
+    public bool IsGamePlaying() {
+        return GamePlayState == GameState.PLAY;
+    }
 }
