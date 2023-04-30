@@ -151,12 +151,16 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!GameManager.Instance.IsGamePlaying())
             return;
-        if (collision.transform.tag == "Ground")
+        if (collision.transform.tag == "Ground" || collision.transform.tag == "Finish")
         {
             IsResting = true;
+        }
 
-            if(PollenCollectionState == PollenState.DELIVERED && GameManager.Instance.IsGamePlaying())
-                GameManager.Instance.GrowForest();
+        if (collision.transform.tag == "Finish")
+        {
+            if (PollenCollectionState == PollenState.DELIVERED && 
+                GameManager.Instance.IsGamePlaying())
+                GameManager.Instance.GenerateCleanWorld();
         }
         if (collision.transform.tag == "MaleFlower")
         {
