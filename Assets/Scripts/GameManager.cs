@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public float PollutedAreaHeight;
 
-    public GameObject MaleFlower, FemaleFlower;
+    public GameObject MaleFlowerPollen, FemaleFlowerPollen;
     public GameObject Forest1, Forest2, Forest3;
 
     public GameObject GameStartPanel, GamePanel, GameOverPanel;
@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     
     public void GrowForest()
     {
+        PollutionGenerator.Instance.StopPollutionGeneration();
         GrowFirstPart();
         StartCoroutine(GrowFirstPart());
         
@@ -85,6 +86,7 @@ public class GameManager : MonoBehaviour
         GamePanel.SetActive(true);
         OxygenManager.Instance.Reset();
         TimerManager.Instance.StartTimer();
+        PollutionGenerator.Instance.GeneratePollution();
     }
 
     public void Replay()
@@ -104,8 +106,8 @@ public class GameManager : MonoBehaviour
         Forest1.SetActive(false);
         Forest2.SetActive(false);
         Forest3.SetActive(false);
-        MaleFlower.SetActive(true);
-        FemaleFlower.SetActive(true);
+        MaleFlowerPollen.SetActive(true);
+        FemaleFlowerPollen.SetActive(false);
     }
 
     public bool IsGamePlaying() {
