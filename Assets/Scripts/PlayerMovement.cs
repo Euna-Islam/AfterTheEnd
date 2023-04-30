@@ -161,12 +161,12 @@ public class PlayerMovement : MonoBehaviour
         if (collision.transform.tag == "MaleFlower")
         {
             PollenCollectionState = PollenState.COLLECTED;
-            collision.gameObject.SetActive(false);
+            collision.gameObject.transform.GetChild(0).gameObject.SetActive(false);
         }
 
         if (collision.transform.tag == "FemaleFlower" && PollenCollectionState == PollenState.COLLECTED)
         {
-            collision.gameObject.SetActive(false);
+            collision.gameObject.transform.GetChild(0).gameObject.SetActive(true);
             PollenCollectionState = PollenState.DELIVERED;
 //            GameManager.Instance.GrowForest();
         }
