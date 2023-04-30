@@ -5,15 +5,18 @@ using System.Collections;
 public class GameManager : MonoBehaviour
 {
     public float PollutedAreaHeight;
+    public float ReducePollutionSpeed;
 
     public GameObject MaleFlowerPollen, FemaleFlowerPollen;
     public GameObject Forest1, Forest2, Forest3;
+    public GameObject PollutedSky, CleanSky;
 
     public GameObject GameStartPanel, GamePanel, GameOverPanel;
 
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
 
+    bool CleaningSky;
     public enum GameState
     {
         GAMEOVER,
@@ -40,19 +43,27 @@ public class GameManager : MonoBehaviour
     {
         Play();
     }
-    
-    public void GrowForest()
+
+    private void Update()
     {
-        PollutionGenerator.Instance.StopPollutionGeneration();
-        GrowFirstPart();
-        StartCoroutine(GrowFirstPart());
-        
+        if (CleaningSky)
+            FadePollutedSky();
     }
 
-    IEnumerator GrowFirstPart() {
+    public void GenerateCleanWorld()
+    {
+        PollutionGenerator.Instance.StopPollutionGeneration();
+        CleaningSky = true;
+
+        //StartCoroutine(GenerateFirstPart());
+
+    }
+
+    IEnumerator GenerateFirstPart() {
         yield return new WaitForSeconds(1);
-        Forest1.SetActive(true);
-        StartCoroutine(GrowSecondPart());
+        SetCleanSky();
+        //Forest1.SetActive(true);
+        //StartCoroutine(GrowSecondPart());
     }
 
     IEnumerator GrowSecondPart()
@@ -79,6 +90,7 @@ public class GameManager : MonoBehaviour
 
     public void Play()
     {
+        CleaningSky = false;
         PlayerMovement.Instance.Reset();
         ResetGame();
         GamePlayState = GameState.PLAY;
@@ -108,6 +120,31 @@ public class GameManager : MonoBehaviour
         Forest3.SetActive(false);
         MaleFlowerPollen.SetActive(true);
         FemaleFlowerPollen.SetActive(false);
+        SetPollutedSky();
+    }
+
+    void SetPollutedSky() {
+        Color c = PollutedSky.GetComponent<SpriteRenderer>().color;
+        PollutedSky.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, 1);
+        //PollutedSky.SetActive(true);
+        //CleanSky.SetActive(false);
+    }
+
+    void SetCleanSky()
+    {
+        InvokeRepeating("FadePollutedSky", .1f, 1);
+    }
+
+    void FadePollutedSky() {
+        Color c = PollutedSky.GetComponent<SpriteRenderer>().color;
+        if (c.a <= 0) {
+            CleaningSky = false;
+            GameOver();
+        } else
+        {
+            float alpha = ReducePollutionSpeed * Time.deltaTime;
+            PollutedSky.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, c.a -= alpha);
+        }    
     }
 
     public bool IsGamePlaying() {
