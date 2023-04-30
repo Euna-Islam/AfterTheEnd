@@ -34,7 +34,7 @@ public class OxygenManager : MonoBehaviour
     {
         if (PlayerMovement.Instance.IsInPollutedArea)
             OxygenLevel.fillAmount -= OxygenLossRate;
-        else OxygenLevel.fillAmount += OxygenGainRate;
+        //else OxygenLevel.fillAmount += OxygenGainRate;
 
         if (GameManager.Instance.IsGamePlaying() && OxygenLevel.fillAmount < .1)
         {

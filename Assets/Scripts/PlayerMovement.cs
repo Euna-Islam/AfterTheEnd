@@ -155,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
         {
             IsResting = true;
 
-            if(PollenCollectionState == PollenState.DELIVERED)
+            if(PollenCollectionState == PollenState.DELIVERED && GameManager.Instance.IsGamePlaying())
                 GameManager.Instance.GrowForest();
         }
         if (collision.transform.tag == "MaleFlower")

@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public float PollutedAreaHeight;
 
-    public GameObject CarbonDiOxide, MaleFlower, FemaleFlower;
+    public GameObject MaleFlower, FemaleFlower;
     public GameObject Forest1, Forest2, Forest3;
 
     public GameObject GameStartPanel, GamePanel, GameOverPanel;
@@ -65,7 +65,6 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         Forest3.SetActive(true);
-        CarbonDiOxide.SetActive(false);
 
         StartCoroutine(EndGame());
     }
@@ -105,7 +104,6 @@ public class GameManager : MonoBehaviour
         Forest1.SetActive(false);
         Forest2.SetActive(false);
         Forest3.SetActive(false);
-        CarbonDiOxide.SetActive(true);
         MaleFlower.SetActive(true);
         FemaleFlower.SetActive(true);
     }
