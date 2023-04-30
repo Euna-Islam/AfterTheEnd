@@ -22,7 +22,8 @@ public class AcidRainFall : MonoBehaviour
 
     private void Reset()
     {
-        transform.position = InitialPos;
+        float x = Random.Range(transform.parent.position.x - 1.5f, transform.parent.position.x + 1.5f);
+        transform.position = new Vector2(x, InitialPos.y);
         RainDrop.SetActive(true);
         DropAnim.SetActive(false);
     }

@@ -10,12 +10,15 @@ public class AcidCloudController : MonoBehaviour
     public float CloudSpeed;
     public float MinX, MaxX;
 
+    public List<GameObject> RainDrops;
+
     public float RainMaxX, RainMinX;
 
     bool isGoingRight;
 
     private void Start()
     {
+        InvokeRepeating("GenerateRain", 0.1f, 0.1f);
         isGoingRight = false;
     }
 
@@ -39,10 +42,18 @@ public class AcidCloudController : MonoBehaviour
     }
 
     void GenerateRain() {
-        float rainXPos = Random.Range(RainMinX, RainMaxX);
-        Vector2 newPos = new Vector2(rainXPos, RainDrop.transform.position.y);
-        GameObject rain = Instantiate(RainDrop, newPos, RainDrop.transform.rotation);
-        rain.transform.SetParent(transform);
+        if (RainDrops.Count == 0)
+        {
+            CancelInvoke("GenerateRain");
+            return;
+        }
+        int randomIndex = Random.Range(0, RainDrops.Count-1);
+        
+        GameObject rain = RainDrops[randomIndex];
+        float x = Random.Range(transform.position.x - 1.5f, transform.position.x + 1.5f);
+        rain.transform.position = new Vector2(x, rain.transform.position.y);
+        rain.SetActive(true);
+        RainDrops.Remove(rain);
     }
 
 

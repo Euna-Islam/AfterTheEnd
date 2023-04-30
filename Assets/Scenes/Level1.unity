@@ -845,7 +845,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &254859142
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2221,8 +2221,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edbf3b5663ac814aaae42f74d285e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Timer: {fileID: 254859143}
-  TotalTime: 100
 --- !u!114 &822998617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5525,7 +5523,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.088068485, y: 0.11425103}
+  m_Offset: {x: -0.088068485, y: 0.11951625}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5536,7 +5534,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.46386302, y: 0.03542187}
+  m_Size: {x: 0.46386302, y: 0.04595232}
   m_EdgeRadius: 0
 --- !u!212 &1761764223
 SpriteRenderer:
@@ -6329,7 +6327,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.1448152, y: 0.12606347}
+  m_Offset: {x: -0.1513319, y: 0.12606347}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6340,7 +6338,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5985703, y: 1.1340473}
+  m_Size: {x: 1.586956, y: 1.1340473}
   m_EdgeRadius: 0
 --- !u!50 &1878332818
 Rigidbody2D:
@@ -7021,7 +7019,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 822998615}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Replay
+        m_MethodName: LoadNextScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

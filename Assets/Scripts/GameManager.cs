@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class GameManager : MonoBehaviour
 
     public int CurrentLevel;
     public int MaxLevel;
+
+    
 
     void Awake()
     {
@@ -70,6 +73,7 @@ public class GameManager : MonoBehaviour
     }
     public void Play()
     {
+        
         CleaningSky = false;
         PlayerMovement.Instance.Reset();
         ResetGame();
@@ -79,7 +83,7 @@ public class GameManager : MonoBehaviour
         GamePanel.SetActive(true);
         BottomPollutionCloud.SetActive(true);
         OxygenManager.Instance.Reset();
-        TimerManager.Instance.StartTimer();
+        //TimerManager.Instance.StartTimer();
         PollutionGenerator.Instance.GeneratePollution();
         GetComponent<LevelManager>().UpdateLevel();
     }
@@ -92,7 +96,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         CurrentLevel = 1;
-        TimerManager.Instance.Reset();
+        //TimerManager.Instance.Reset();
         GamePlayState = GameState.GAMEOVER;
         GamePanel.SetActive(false);
         GameOverPanel.SetActive(true);
@@ -140,7 +144,7 @@ public class GameManager : MonoBehaviour
     public void IncreasePlayerLevel() {
         CurrentLevel++;
         
-        if (CurrentLevel <= MaxLevel)
+        if (CurrentLevel < MaxLevel)
         {
             GamePlayState = GameState.LEVEL_COMPLETE;
             GamePanel.SetActive(false);
@@ -151,5 +155,10 @@ public class GameManager : MonoBehaviour
 
     public bool IsGamePlaying() {
         return GamePlayState == GameState.PLAY;
+    }
+
+    public void LoadNextScene()
+    {
+        SceneManager.LoadScene(CurrentLevel);
     }
 }

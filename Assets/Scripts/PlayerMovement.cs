@@ -45,6 +45,11 @@ public class PlayerMovement : MonoBehaviour
     public PollenState PollenCollectionState;
 
     Vector3 InitialPosition;
+
+    public bool IsPolinated()
+    {
+        return PollenCollectionState == PollenState.DELIVERED;
+    }
     void Awake()
     {
         if (instance == null)
@@ -156,7 +161,13 @@ public class PlayerMovement : MonoBehaviour
             IsResting = true;
         }
 
-        
+        if (collision.transform.tag == "RainUnit" || collision.transform.tag == "Mutant")
+        {
+            GameManager.Instance.GameOver();
+
+        }
+
+
         if (collision.transform.tag == "MaleFlower")
         {
             PollenCollectionState = PollenState.COLLECTED;
@@ -170,12 +181,13 @@ public class PlayerMovement : MonoBehaviour
             if (PollenCollectionState == PollenState.DELIVERED &&
                             GameManager.Instance.IsGamePlaying())
                 GameManager.Instance.GenerateCleanWorld();
+            IsInPollutedArea = false;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.tag == "Finish")
+        if (collision.transform.tag == "Finish" && GameManager.Instance.IsGamePlaying())
         {
             GameManager.Instance.IncreasePlayerLevel();
         }
