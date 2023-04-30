@@ -8,9 +8,9 @@ public class GameManager : MonoBehaviour
     public float ReducePollutionSpeed;
 
     public GameObject MaleFlowerPollen, FemaleFlowerPollen;
-    public GameObject PollutedSky, CleanSky, BottomPollution;
+    public GameObject PollutedSky, CleanSky, BottomPollution, BottomPollutionCloud;
 
-    public GameObject GameStartPanel, GamePanel, GameOverPanel;
+    public GameObject GameStartPanel, GamePanel, GameOverPanel, LevelCompletePanel;
 
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour
     {
         GAMEOVER,
         PLAY,
-        START
+        START,
+        LEVEL_COMPLETE
     }
 
     public GameState GamePlayState;
@@ -74,7 +75,9 @@ public class GameManager : MonoBehaviour
         ResetGame();
         GamePlayState = GameState.PLAY;
         GameOverPanel.SetActive(false);
+        LevelCompletePanel.SetActive(false);
         GamePanel.SetActive(true);
+        BottomPollutionCloud.SetActive(true);
         OxygenManager.Instance.Reset();
         TimerManager.Instance.StartTimer();
         PollutionGenerator.Instance.GeneratePollution();
@@ -88,6 +91,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        CurrentLevel = 1;
         TimerManager.Instance.Reset();
         GamePlayState = GameState.GAMEOVER;
         GamePanel.SetActive(false);
@@ -117,24 +121,30 @@ public class GameManager : MonoBehaviour
 
     void FadePollutedSky() {
         Color c = PollutedSky.GetComponent<SpriteRenderer>().color;
-        if (c.a <= 0) {
+        if (c.a <= 0)
+        {
             CleaningSky = false;
             //GameOver();
-        } else
+        }
+        else
         {
             float alpha = ReducePollutionSpeed * Time.deltaTime;
             PollutedSky.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, c.a -= alpha);
             c = BottomPollution.GetComponent<SpriteRenderer>().color;
             BottomPollution.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, c.a -= alpha);
-            //PollutedMountain.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, c.a -= alpha);
-        }    
+
+            BottomPollutionCloud.SetActive(false);
+        }
     }
 
     public void IncreasePlayerLevel() {
         CurrentLevel++;
+        
         if (CurrentLevel <= MaxLevel)
         {
-            Replay();
+            GamePlayState = GameState.LEVEL_COMPLETE;
+            GamePanel.SetActive(false);
+            LevelCompletePanel.SetActive(true);
         }  
         else GameOver();
     }
