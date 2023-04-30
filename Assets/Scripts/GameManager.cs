@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        GamePlayState = GameState.START;
+        GamePlayState = GameState.PLAY;
     }
     
     public void GrowForest()
