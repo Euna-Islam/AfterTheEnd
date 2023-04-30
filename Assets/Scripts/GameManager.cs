@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         GamePlayState = GameState.PLAY;
+        TimerManager.Instance.StartTimer();
     }
     
     public void GrowForest()

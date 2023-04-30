@@ -2403,7 +2403,7 @@ GameObject:
   - component: {fileID: 1279528088}
   - component: {fileID: 1279528089}
   m_Layer: 0
-  m_Name: Background2
+  m_Name: Sky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2417,8 +2417,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1279528087}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.0797, y: 3.0323, z: 7.39}
-  m_LocalScale: {x: 1.8441807, y: 1.8827536, z: 3.934}
+  m_LocalPosition: {x: 1.1268, y: 3.0323, z: 7.39}
+  m_LocalScale: {x: 1.8539549, y: 1.8827536, z: 3.934}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1498121437}
