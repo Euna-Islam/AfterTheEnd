@@ -377,8 +377,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 15108839}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.34, y: -3.94, z: 0}
-  m_LocalScale: {x: 7, y: 7, z: 1}
+  m_LocalPosition: {x: 7.34, y: -2.67, z: 0}
+  m_LocalScale: {x: 15, y: 15, z: 2.142857}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1051321462}
@@ -2119,9 +2119,6 @@ MonoBehaviour:
   ReducePollutionSpeed: 0.5
   MaleFlowerPollen: {fileID: 111877257}
   FemaleFlowerPollen: {fileID: 2000519619}
-  Forest1: {fileID: 3183235}
-  Forest2: {fileID: 24903994}
-  Forest3: {fileID: 716566049}
   PollutedSky: {fileID: 1279528087}
   CleanSky: {fileID: 964509945}
   BottomPollution: {fileID: 1004869420}
@@ -2224,8 +2221,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 887524454}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.44, y: -3.91, z: 0}
-  m_LocalScale: {x: 7, y: 7, z: 7}
+  m_LocalPosition: {x: -2.44, y: -3.162, z: 0}
+  m_LocalScale: {x: 11.6746, y: 11.6746, z: 11.6746}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1051321462}
@@ -3824,8 +3821,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1244988312}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.3, y: -3.94, z: 0}
-  m_LocalScale: {x: 7, y: 7, z: 1}
+  m_LocalPosition: {x: -6.3, y: -2.63, z: 0}
+  m_LocalScale: {x: 15, y: 15, z: 2.142857}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1051321462}
@@ -4741,8 +4738,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1649894058}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.96, y: -3.91, z: 0}
-  m_LocalScale: {x: 7, y: 7, z: 7}
+  m_LocalPosition: {x: 1.96, y: -3.0373, z: 0}
+  m_LocalScale: {x: 12.4544, y: 12.4544, z: 12.4544}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1051321462}
