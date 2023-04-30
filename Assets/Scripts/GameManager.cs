@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject MaleFlowerPollen, FemaleFlowerPollen;
     public GameObject Forest1, Forest2, Forest3;
-    public GameObject PollutedSky, CleanSky, PollutedMountain, CleanMountain;
+    public GameObject PollutedSky, CleanSky;
 
     public GameObject GameStartPanel, GamePanel, GameOverPanel;
 
@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
         Color c = PollutedSky.GetComponent<SpriteRenderer>().color;
         PollutedSky.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, 1);
 
-        PollutedMountain.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, 1);
+        //PollutedMountain.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, 1);
         //PollutedSky.SetActive(true);
         //CleanSky.SetActive(false);
     }
@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
         {
             float alpha = ReducePollutionSpeed * Time.deltaTime;
             PollutedSky.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, c.a -= alpha);
-            PollutedMountain.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, c.a -= alpha);
+            //PollutedMountain.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, c.a -= alpha);
         }    
     }
 
