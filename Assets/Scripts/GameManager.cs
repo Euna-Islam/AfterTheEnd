@@ -8,8 +8,7 @@ public class GameManager : MonoBehaviour
     public float ReducePollutionSpeed;
 
     public GameObject MaleFlowerPollen, FemaleFlowerPollen;
-    public GameObject Forest1, Forest2, Forest3;
-    public GameObject PollutedSky, CleanSky;
+    public GameObject PollutedSky, CleanSky, BottomPollution;
 
     public GameObject GameStartPanel, GamePanel, GameOverPanel;
 
@@ -68,29 +67,6 @@ public class GameManager : MonoBehaviour
         //Forest1.SetActive(true);
         //StartCoroutine(GrowSecondPart());
     }
-
-    IEnumerator GrowSecondPart()
-    {
-        yield return new WaitForSeconds(1);
-        Forest2.SetActive(true);
-        StartCoroutine(GrowThirdPart());
-    }
-
-    IEnumerator GrowThirdPart()
-    {
-        yield return new WaitForSeconds(1);
-        Forest3.SetActive(true);
-
-        StartCoroutine(EndGame());
-    }
-
-    IEnumerator EndGame() {
-        yield return new WaitForSeconds(1);
-        GameOver();
-        StopAllCoroutines();
-    }
-
-
     public void Play()
     {
         CleaningSky = false;
@@ -102,6 +78,7 @@ public class GameManager : MonoBehaviour
         OxygenManager.Instance.Reset();
         TimerManager.Instance.StartTimer();
         PollutionGenerator.Instance.GeneratePollution();
+        GetComponent<LevelManager>().UpdateLevel();
     }
 
     public void Replay()
@@ -118,9 +95,6 @@ public class GameManager : MonoBehaviour
     }
 
     public void ResetGame() {
-        Forest1.SetActive(false);
-        Forest2.SetActive(false);
-        Forest3.SetActive(false);
         MaleFlowerPollen.SetActive(true);
         FemaleFlowerPollen.SetActive(false);
         SetPollutedSky();
@@ -129,7 +103,8 @@ public class GameManager : MonoBehaviour
     void SetPollutedSky() {
         Color c = PollutedSky.GetComponent<SpriteRenderer>().color;
         PollutedSky.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, 1);
-
+        c = BottomPollution.GetComponent<SpriteRenderer>().color;
+        BottomPollution.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, 1);
         //PollutedMountain.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, 1);
         //PollutedSky.SetActive(true);
         //CleanSky.SetActive(false);
@@ -149,14 +124,16 @@ public class GameManager : MonoBehaviour
         {
             float alpha = ReducePollutionSpeed * Time.deltaTime;
             PollutedSky.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, c.a -= alpha);
+            c = BottomPollution.GetComponent<SpriteRenderer>().color;
+            BottomPollution.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, c.a -= alpha);
             //PollutedMountain.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, c.a -= alpha);
         }    
     }
 
     public void IncreasePlayerLevel() {
-        if (CurrentLevel < MaxLevel)
+        CurrentLevel++;
+        if (CurrentLevel <= MaxLevel)
         {
-            CurrentLevel++;
             Replay();
         }  
         else GameOver();
