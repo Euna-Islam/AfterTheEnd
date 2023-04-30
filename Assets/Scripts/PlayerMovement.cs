@@ -158,9 +158,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.transform.tag == "Finish")
         {
-            if (PollenCollectionState == PollenState.DELIVERED && 
-                GameManager.Instance.IsGamePlaying())
-                GameManager.Instance.GenerateCleanWorld();
+            GameManager.Instance.IncreasePlayerLevel();
         }
         if (collision.transform.tag == "MaleFlower")
         {
@@ -172,7 +170,9 @@ public class PlayerMovement : MonoBehaviour
         {
             collision.gameObject.transform.GetChild(0).gameObject.SetActive(true);
             PollenCollectionState = PollenState.DELIVERED;
-//            GameManager.Instance.GrowForest();
+            if (PollenCollectionState == PollenState.DELIVERED &&
+                            GameManager.Instance.IsGamePlaying())
+                GameManager.Instance.GenerateCleanWorld();
         }
     }
 
