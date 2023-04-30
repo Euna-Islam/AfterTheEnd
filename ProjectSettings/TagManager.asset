@@ -8,6 +8,9 @@ TagManager:
   - CO2
   - MaleFlower
   - FemaleFlower
+  - RainUnit
+  - Shed
+  - Soil
   layers:
   - Default
   - TransparentFX
