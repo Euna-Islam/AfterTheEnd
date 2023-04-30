@@ -30,7 +30,7 @@ public class TimerManager : MonoBehaviour
 
     public void Reset()
     {
-        TotalTime = 20;
+        TotalTime = 100;
         Timer.text = TotalTime + "s";
     }
 
