@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject PollutedSky, CleanSky, BottomPollution, BottomPollutionCloud;
     public GameObject MaleFlower, FemaleFlower, CleanGround, PollutedGround;
     public GameObject GameStartPanel, GamePanel, GameOverPanel, LevelCompletePanel, AllLevelsCompleterPanel;
-
+    public GameObject ExitDoor;
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
 
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
     {
         PollutionGenerator.Instance.StopPollutionGeneration();
         CleaningSky = true;
-
+        ExitDoor.SetActive(true);
         //StartCoroutine(GenerateFirstPart());
 
     }
