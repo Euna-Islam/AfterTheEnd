@@ -14,7 +14,7 @@ public class PlayerInput : MonoBehaviour
         PlayerMovement.Instance.ChangeHorizontalDirection(x);
 
         if (Input.GetKey(KeyCode.Space))
-            PlayerMovement.Instance.ChangeVerticalDirection(true);
-        else PlayerMovement.Instance.ChangeVerticalDirection(false);
+            PlayerMovement.Instance.MovePlayerUp();
+        //else PlayerMovement.Instance.ChangeVerticalDirection(false);
     }
 }
