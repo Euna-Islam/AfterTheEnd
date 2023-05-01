@@ -43,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 InitialPosition;
 
+    public Animator BeeAnim;
+
     void Awake()
     {
         if (instance == null)
@@ -113,12 +115,14 @@ public class PlayerMovement : MonoBehaviour
 
     void HasEnteredPollutedArea() {
 
-        if (transform.position.y <= GameManager.Instance.PollutedAreaHeight)
+        if (transform.position.y <= GameManager.Instance.PollutedAreaHeight && !IsPolinated())
         {
             IsInPollutedArea = true;
+            BeeAnim.SetBool("IsBeeHurt", true);
         }
         else {
             IsInPollutedArea = false;
+            BeeAnim.SetBool("IsBeeHurt", false);
         }
     }
 
@@ -162,8 +166,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (!IsPolinated() && (collision.transform.tag == "RainUnit" || collision.transform.tag == "Mutant"))
         {
+            ActivateDeadAnim();
             GameManager.Instance.GameOver();
-
+            
         }
 
 
@@ -205,6 +210,11 @@ public class PlayerMovement : MonoBehaviour
     public bool IsPolinated()
     {
         return PollenCollectionState == PollenState.DELIVERED;
+    }
+
+    public void ActivateDeadAnim() {
+        Debug.Log("dead");
+        BeeAnim.SetBool("IsDead", true);
     }
 
 }

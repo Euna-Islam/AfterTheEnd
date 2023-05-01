@@ -43,7 +43,9 @@ public class OxygenManager : MonoBehaviour
 
         if (GameManager.Instance.IsGamePlaying() && OxygenLevel.fillAmount < .1)
         {
+            PlayerMovement.Instance.ActivateDeadAnim();
             GameManager.Instance.GameOver();
+            
         }
 
     }

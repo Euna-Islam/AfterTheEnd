@@ -1486,6 +1486,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 457588987613876960, guid: 90bcfd03dc853884b8e13dfd7797a226, type: 3}
+      propertyPath: BeeAnim
+      value: 
+      objectReference: {fileID: 611460981}
+    - target: {fileID: 457588987613876960, guid: 90bcfd03dc853884b8e13dfd7797a226, type: 3}
+      propertyPath: UpwardDisplacement
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 457588987613876988, guid: 90bcfd03dc853884b8e13dfd7797a226, type: 3}
+      propertyPath: m_Mass
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 457588987613876988, guid: 90bcfd03dc853884b8e13dfd7797a226, type: 3}
+      propertyPath: m_LinearDrag
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 457588987613876988, guid: 90bcfd03dc853884b8e13dfd7797a226, type: 3}
+      propertyPath: m_GravityScale
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 457588987614005349, guid: 90bcfd03dc853884b8e13dfd7797a226, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1535,6 +1555,11 @@ PrefabInstance:
 --- !u!4 &611460980 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 457588987614005349, guid: 90bcfd03dc853884b8e13dfd7797a226, type: 3}
+  m_PrefabInstance: {fileID: 611460979}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &611460981 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 457588987650624024, guid: 90bcfd03dc853884b8e13dfd7797a226, type: 3}
   m_PrefabInstance: {fileID: 611460979}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &612580244
@@ -1742,7 +1767,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &707268326
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3264,7 +3289,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1030474521
 Animator:
   serializedVersion: 5
@@ -3350,7 +3375,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1051321462 stripped
 Transform:
@@ -5044,7 +5069,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1740345383
 Animator:
   serializedVersion: 5
@@ -5130,7 +5155,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1761764220
 GameObject:
@@ -5461,6 +5486,7 @@ MonoBehaviour:
   IsInPollutedArea: 0
   IsResting: 0
   PollenCollectionState: 0
+  BeeAnim: {fileID: 0}
 --- !u!61 &1817204539
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5774,6 +5800,7 @@ MonoBehaviour:
   IsInPollutedArea: 0
   IsResting: 0
   PollenCollectionState: 0
+  BeeAnim: {fileID: 0}
 --- !u!61 &1878332815
 BoxCollider2D:
   m_ObjectHideFlags: 0

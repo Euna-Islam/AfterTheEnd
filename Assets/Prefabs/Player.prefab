@@ -145,6 +145,7 @@ MonoBehaviour:
   IsInPollutedArea: 0
   IsResting: 0
   PollenCollectionState: 0
+  BeeAnim: {fileID: 457588987650624024}
 --- !u!1 &457588987650624026
 GameObject:
   m_ObjectHideFlags: 0
