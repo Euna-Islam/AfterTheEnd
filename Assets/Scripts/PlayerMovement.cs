@@ -85,8 +85,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(GameManager.Instance.IsGamePlaying())
-            MovePlayer();
+        MovePlayer();
     }
 
     void MovePlayer()
@@ -108,11 +107,12 @@ public class PlayerMovement : MonoBehaviour
 
         float nextPosY = currentPos.y;
         // Does the ray intersect any objects excluding the player layer
-        //if (IsResting)
-        //{
-        //    nextPosY = currentPos.y;
-        //}
-        //else 
+        if (GameManager.Instance.IsGameOver())
+        {
+            nextPosX = currentPos.x;
+            nextPosY = currentPos.y - DownwardDisplacement;
+        }
+        else
         {
             nextPosY = PlayerVerticalDirection == Direction.DOWN ? currentPos.y - DownwardDisplacement :
                 (IsInPollutedArea ? currentPos.y + UpwardDisplacement / 2 : currentPos.y + UpwardDisplacement);
@@ -182,7 +182,6 @@ public class PlayerMovement : MonoBehaviour
             || collision.transform.tag == "FemaleFlower" || collision.transform.tag == "Hive"
             )
         {
-            Debug.Log("Hitting ground");
             IsResting = true;
         }
     }
@@ -240,7 +239,6 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void ActivateDeadAnim() {
-        Debug.Log("dead");
         BeeAnim.SetBool("IsDead", true);
     }
 

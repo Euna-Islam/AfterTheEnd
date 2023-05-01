@@ -180,6 +180,11 @@ public class GameManager : MonoBehaviour
         return GamePlayState == GameState.PLAY;
     }
 
+    public bool IsGameOver()
+    {
+        return GamePlayState == GameState.GAMEOVER;
+    }
+
     public void PlayFromBeginning()
     {
         PlayerLevelController.Instance.CurrentLevel = 1;
