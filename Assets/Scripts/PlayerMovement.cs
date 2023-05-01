@@ -161,7 +161,7 @@ public class PlayerMovement : MonoBehaviour
             IsResting = true;
         }
 
-        if (collision.transform.tag == "RainUnit" || collision.transform.tag == "Mutant")
+        if (!IsPolinated() && (collision.transform.tag == "RainUnit" || collision.transform.tag == "Mutant"))
         {
             GameManager.Instance.GameOver();
 
@@ -187,7 +187,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.tag == "Finish" && GameManager.Instance.IsGamePlaying())
+        if (collision.transform.tag == "Finish" && GameManager.Instance.IsGamePlaying()
+            && IsPolinated())
         {
             GameManager.Instance.IncreasePlayerLevel();
         }

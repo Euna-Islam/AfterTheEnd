@@ -7,6 +7,6 @@ public class LevelManager : MonoBehaviour
     public TMP_Text Level;
 
     public void UpdateLevel() {
-        Level.text = "Level " + GameManager.Instance.CurrentLevel;
+        Level.text = "Level " + PlayerLevelController.Instance.CurrentLevel;
     }
 }
