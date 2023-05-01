@@ -7,7 +7,7 @@ public class SoundEffectManager : MonoBehaviour
     public static SoundEffectManager Instance;
 
     [SerializeField]
-    private AudioSource EffectSource;
+    private AudioSource PollutionSource, DeathSource;
     public AudioClip[] EffectClips;
 
     private void Start()
@@ -24,8 +24,22 @@ public class SoundEffectManager : MonoBehaviour
         
     }
 
-    public void PlayEffect(int Clip)
+    public void PlayPolution()
     {
-        EffectSource.PlayOneShot(EffectClips[Clip]);
+        PollutionSource.Play();
+    }
+
+    public void StopEffect()
+    {
+        //PollutionSource.Stop();
+    }
+
+    public void PlayDeath()
+    {
+        DeathSource.Play();
+    }
+    public void StopDeath()
+    {
+        DeathSource.Stop();
     }
 }

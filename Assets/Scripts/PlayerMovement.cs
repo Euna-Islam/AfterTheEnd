@@ -140,11 +140,14 @@ public class PlayerMovement : MonoBehaviour
         {
             IsInPollutedArea = true;
             BeeAnim.SetBool("IsBeeHurt", true);
+            SoundEffectManager.Instance.StopEffect();
         }
         else {
             IsInPollutedArea = false;
             BeeAnim.SetBool("IsBeeHurt", false);
+            SoundEffectManager.Instance.PlayPolution();
         }
+
     }
 
 

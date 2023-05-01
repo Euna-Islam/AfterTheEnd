@@ -106,9 +106,11 @@ public class GameManager : MonoBehaviour
     {
         //PlayerLevelController.Instance.CurrentLevel = 1;
         //TimerManager.Instance.Reset();
+        SoundEffectManager.Instance.PlayDeath();
         GamePlayState = GameState.GAMEOVER;
         GamePanel.SetActive(false);
         GameOverPanel.SetActive(true);
+
     }
 
     public void ResetGame() {
