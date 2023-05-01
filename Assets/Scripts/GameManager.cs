@@ -45,6 +45,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        if(PlayerLevelController.Instance.CurrentLevel == 2)
+            AudioManager.Instance.PlayBackgroundMusic2();
+        if (PlayerLevelController.Instance.CurrentLevel == 3)
+            AudioManager.Instance.PlayBackgroundMusic3();
         CleanGround.SetActive(false);
         Play();
     }
