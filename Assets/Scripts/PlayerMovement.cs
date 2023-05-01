@@ -110,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
         if (GameManager.Instance.IsGameOver())
         {
             nextPosX = currentPos.x;
-            nextPosY = currentPos.y - DownwardDisplacement;
+            nextPosY = currentPos.y - DownwardDisplacement * 3f;
         }
         else
         {
@@ -206,7 +206,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if (collision.transform.tag == "MaleFlower")
+        if (collision.transform.tag == "MaleFlower" && !IsPolinated())
         {
             PollenCollectionState = PollenState.COLLECTED;
             collision.gameObject.transform.GetChild(0).gameObject.SetActive(false);
@@ -215,7 +215,7 @@ public class PlayerMovement : MonoBehaviour
             //SoundEffectManager.Instance.PlayEffect(1);
         }
 
-        if (collision.transform.tag == "FemaleFlower" && PollenCollectionState == PollenState.COLLECTED)
+        if (collision.transform.tag == "FemaleFlower" && PollenCollectionState == PollenState.COLLECTED && !IsPolinated())
         {
             collision.gameObject.transform.GetChild(0).gameObject.SetActive(true);
             PollenCollectionState = PollenState.DELIVERED;
