@@ -1945,7 +1945,7 @@ GameObject:
   - component: {fileID: 494006813}
   m_Layer: 0
   m_Name: Shed
-  m_TagString: Shed
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8131,7 +8131,7 @@ GameObject:
   - component: {fileID: 1995284153}
   m_Layer: 0
   m_Name: Shed (1)
-  m_TagString: Shed
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8326,7 +8326,7 @@ GameObject:
   - component: {fileID: 2025517129}
   m_Layer: 0
   m_Name: Shed (2)
-  m_TagString: Shed
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
