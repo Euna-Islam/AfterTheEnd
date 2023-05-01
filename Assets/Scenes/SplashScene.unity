@@ -478,6 +478,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f702fdc003cf91c449b5c19d0a31572f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Tips:
+  - {fileID: 2212942260577469758}
+  - {fileID: 1528802418975865964}
+  - {fileID: 466404104805464511}
+  - {fileID: 1843230384}
 --- !u!4 &365724327
 Transform:
   m_ObjectHideFlags: 0
@@ -1026,7 +1031,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 466404104452717911, guid: ba2b62dcec5534de0a43e959bffc5ba9, type: 3}
       propertyPath: m_text
-      value: Beware of Acidic Rain.
+      value: Beware of Acidic Rain
       objectReference: {fileID: 0}
     - target: {fileID: 466404104452717913, guid: ba2b62dcec5534de0a43e959bffc5ba9, type: 3}
       propertyPath: m_Name
@@ -1034,13 +1039,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 466404104452717913, guid: ba2b62dcec5534de0a43e959bffc5ba9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba2b62dcec5534de0a43e959bffc5ba9, type: 3}
 --- !u!224 &1843230383 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 466404104452717910, guid: ba2b62dcec5534de0a43e959bffc5ba9, type: 3}
+  m_PrefabInstance: {fileID: 1843230382}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1843230384 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 466404104452717913, guid: ba2b62dcec5534de0a43e959bffc5ba9, type: 3}
   m_PrefabInstance: {fileID: 1843230382}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2060681831
@@ -1288,10 +1298,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 466404104452717913, guid: ba2b62dcec5534de0a43e959bffc5ba9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba2b62dcec5534de0a43e959bffc5ba9, type: 3}
+--- !u!1 &466404104805464511 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 466404104452717913, guid: ba2b62dcec5534de0a43e959bffc5ba9, type: 3}
+  m_PrefabInstance: {fileID: 466404104805464510}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1528802418975865963
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1389,10 +1404,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1528802419579732983, guid: 4ca4511f6918b4b009c5fbedc8b528ce, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ca4511f6918b4b009c5fbedc8b528ce, type: 3}
+--- !u!1 &1528802418975865964 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1528802419579732983, guid: 4ca4511f6918b4b009c5fbedc8b528ce, type: 3}
+  m_PrefabInstance: {fileID: 1528802418975865963}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2212942260577469757
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1403,6 +1423,10 @@ PrefabInstance:
     - target: {fileID: 2212942260214491672, guid: a8970a5a7e3db48fb828f467deb2efdd, type: 3}
       propertyPath: m_Name
       value: Tips1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2212942260214491672, guid: a8970a5a7e3db48fb828f467deb2efdd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2212942260214491675, guid: a8970a5a7e3db48fb828f467deb2efdd, type: 3}
       propertyPath: m_Pivot.x
@@ -1490,6 +1514,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8970a5a7e3db48fb828f467deb2efdd, type: 3}
+--- !u!1 &2212942260577469758 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2212942260214491672, guid: a8970a5a7e3db48fb828f467deb2efdd, type: 3}
+  m_PrefabInstance: {fileID: 2212942260577469757}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3411041367137816305
 PrefabInstance:
   m_ObjectHideFlags: 0

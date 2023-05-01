@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject MaleFlowerPollen, FemaleFlowerPollen;
     public GameObject PollutedSky, CleanSky, BottomPollution, BottomPollutionCloud;
+    public GameObject CleanCloud, PollutedCloud;
     public GameObject MaleFlower, FemaleFlower, CleanGround, PollutedGround;
     public GameObject GameStartPanel, GamePanel, GameOverPanel, LevelCompletePanel, AllLevelsCompleterPanel;
     public GameObject ExitDoor;
@@ -133,6 +134,7 @@ public class GameManager : MonoBehaviour
         if (c.a <= 0)
         {
             CleaningSky = false;
+            PollutedCloud.SetActive(false);
             //GameOver();
         }
         else
@@ -145,6 +147,12 @@ public class GameManager : MonoBehaviour
             c = PollutedGround.GetComponent<SpriteRenderer>().color;
             PollutedGround.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, c.a -= alpha);
 
+            for (int i = 0; i < PollutedCloud.transform.childCount; i++)
+            {
+                c = PollutedCloud.transform.GetChild(i).GetComponent<SpriteRenderer>().color;
+                PollutedCloud.transform.GetChild(i).GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, c.a -= alpha);
+
+            }
             //c = CleanGround.GetComponent<SpriteRenderer>().color;
             //CleanGround.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, c.a += alpha);
 
@@ -154,7 +162,11 @@ public class GameManager : MonoBehaviour
             c = FemaleFlower.GetComponent<SpriteRenderer>().color;
             FemaleFlower.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, c.a += alpha);
 
+
             BottomPollutionCloud.SetActive(false);
+
+
+            //PollutedCloud.SetActive(false);6
         }
     }
 

@@ -203,6 +203,8 @@ public class PlayerMovement : MonoBehaviour
         {
             PollenCollectionState = PollenState.COLLECTED;
             collision.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            if (PlayerLevelController.Instance.CurrentLevel == 1)
+                GameManager.Instance.GetComponent<TutorialManager>().DisableCollect();
             //SoundEffectManager.Instance.PlayEffect(1);
         }
 
@@ -223,8 +225,9 @@ public class PlayerMovement : MonoBehaviour
         if (collision.transform.tag == "Finish" && GameManager.Instance.IsGamePlaying()
             && IsPolinated())
         {
-            gameObject.SetActive(false);
+            collision.transform.gameObject.SetActive(false);
             GameManager.Instance.IncreasePlayerLevel();
+            gameObject.SetActive(false);
         }
     }
 
