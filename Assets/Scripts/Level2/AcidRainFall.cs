@@ -27,6 +27,4 @@ public class AcidRainFall : MonoBehaviour
         RainDrop.SetActive(true);
         DropAnim.SetActive(false);
     }
-
-
 }

@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject MaleFlowerPollen, FemaleFlowerPollen;
     public GameObject PollutedSky, CleanSky, BottomPollution, BottomPollutionCloud;
 
-    public GameObject GameStartPanel, GamePanel, GameOverPanel, LevelCompletePanel, AllLevelsCompleterPanel;
+    public GameObject GameStartPanel, GamePanel, GameOverPanel, LevelCompletePanel;
 
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour
     }
 
     public GameState GamePlayState;
+
+    public int CurrentLevel;
+    public int MaxLevel;
 
     
 
@@ -83,18 +86,16 @@ public class GameManager : MonoBehaviour
         //TimerManager.Instance.StartTimer();
         PollutionGenerator.Instance.GeneratePollution();
         GetComponent<LevelManager>().UpdateLevel();
-
     }
 
     public void Replay()
     {
-        //Play();
-        LoadNextScene();
+        Play();
     }
 
     public void GameOver()
     {
-        //PlayerLevelController.Instance.CurrentLevel = 1;
+        CurrentLevel = 1;
         //TimerManager.Instance.Reset();
         GamePlayState = GameState.GAMEOVER;
         GamePanel.SetActive(false);
@@ -141,35 +142,23 @@ public class GameManager : MonoBehaviour
     }
 
     public void IncreasePlayerLevel() {
-        PlayerLevelController.Instance.CurrentLevel++;
-        GamePlayState = GameState.LEVEL_COMPLETE;
-        GamePanel.SetActive(false);
-        if (PlayerLevelController.Instance.CurrentLevel <= PlayerLevelController.Instance.MaxLevel)
+        CurrentLevel++;
+        
+        if (CurrentLevel < MaxLevel)
         {
+            GamePlayState = GameState.LEVEL_COMPLETE;
+            GamePanel.SetActive(false);
             LevelCompletePanel.SetActive(true);
         }  
-        else DisplayAllLevelsCompletedPanel();
+        else GameOver();
     }
-
-    void DisplayAllLevelsCompletedPanel() {
-        GamePanel.SetActive(false);
-        AllLevelsCompleterPanel.SetActive(true);
-    }
-
-
 
     public bool IsGamePlaying() {
         return GamePlayState == GameState.PLAY;
     }
 
-    public void PlayFromBeginning()
-    {
-        PlayerLevelController.Instance.CurrentLevel = 1;
-        LoadNextScene();
-    }
-
     public void LoadNextScene()
     {
-        SceneManager.LoadScene(PlayerLevelController.Instance.CurrentLevel);
+        SceneManager.LoadScene(CurrentLevel);
     }
 }

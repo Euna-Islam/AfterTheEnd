@@ -32,11 +32,8 @@ public class OxygenManager : MonoBehaviour
 
     void UpdateOxygenIndicator()
     {
-        if (PlayerMovement.Instance.IsPolinated()) {
-            CancelInvoke("UpdateOxygenIndicator");
+        if (PlayerMovement.Instance.IsPolinated())
             return;
-        }
-            
         if (PlayerMovement.Instance.IsInPollutedArea)
             OxygenLevel.fillAmount -= OxygenLossRate;
         //else OxygenLevel.fillAmount += OxygenGainRate;

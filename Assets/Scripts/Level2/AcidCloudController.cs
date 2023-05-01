@@ -24,10 +24,7 @@ public class AcidCloudController : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerMovement.Instance.IsPolinated()) {
-            gameObject.SetActive(false);
-        } else
-            Move();
+        Move();
         //GenerateRain();
     }
 
