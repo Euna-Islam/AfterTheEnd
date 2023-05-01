@@ -102,11 +102,12 @@ public class PlayerMovement : MonoBehaviour
 
         float nextPosY = currentPos.y;
         // Does the ray intersect any objects excluding the player layer
-        if (IsResting)
+        //if (IsResting)
+        //{
+        //    nextPosY = currentPos.y;
+        //}
+        //else 
         {
-            nextPosY = currentPos.y;
-        }
-        else {
             nextPosY = PlayerVerticalDirection == Direction.DOWN ? currentPos.y - DownwardDisplacement :
                 (IsInPollutedArea ? currentPos.y + UpwardDisplacement / 2 : currentPos.y + UpwardDisplacement);
         }
