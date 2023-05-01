@@ -6,7 +6,7 @@ public class PollutionGenerator : MonoBehaviour
     private static PollutionGenerator instance;
     public static PollutionGenerator Instance { get { return instance; } }
 
-    public GameObject PollutionBubble;
+    //public GameObject PollutionBubble;
 
     public float BubbleMinRangeX;
     public float BubbleMaxRangeX;
