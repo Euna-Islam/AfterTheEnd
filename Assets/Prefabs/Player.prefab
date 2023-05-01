@@ -138,9 +138,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HorizontalDisplacement: 0.1
   UpwardDisplacement: 0.2
-  DownwardDisplacement: 0.2
+  DownwardDisplacement: 0.15
   Speed: 20
   PlayerHorizontalDirection: 1
+  PlayerVerticalDirection: 0
   PlayerSprite: {fileID: 457588987650624025}
   IsInPollutedArea: 0
   IsResting: 0

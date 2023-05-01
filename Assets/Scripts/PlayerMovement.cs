@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public Direction PlayerHorizontalDirection;
-    //public Direction PlayerVerticalDirection;
+    public Direction PlayerVerticalDirection;
 
     public SpriteRenderer PlayerSprite;
 
@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
     public void Reset()
     {
         PlayerHorizontalDirection = Direction.RIGHT;
-        //PlayerVerticalDirection = Direction.DOWN;
+        PlayerVerticalDirection = Direction.DOWN;
         IsInPollutedArea = false;
         IsResting = true;
         PollenCollectionState = PollenState.NOT_COLLECTED;
@@ -99,18 +99,31 @@ public class PlayerMovement : MonoBehaviour
                 nextPosX = currentPos.x;
                 break;
         }
-        //float nextPosY = PlayerVerticalDirection == Direction.DOWN ?
-        //    currentPos.y - DownwardDisplacement : 
-        //    (IsInPollutedArea ? currentPos.y + UpwardDisplacement/2 : currentPos.y + UpwardDisplacement);
 
-        Vector2 nextPos = new Vector3(nextPosX, currentPos.y);
+        float nextPosY = currentPos.y;
+        // Does the ray intersect any objects excluding the player layer
+        if (IsResting)
+        {
+            nextPosY = currentPos.y;
+        }
+        else {
+            nextPosY = PlayerVerticalDirection == Direction.DOWN ? currentPos.y - DownwardDisplacement :
+                (IsInPollutedArea ? currentPos.y + UpwardDisplacement / 2 : currentPos.y + UpwardDisplacement);
+        }
+        Vector2 nextPos = new Vector3(nextPosX, nextPosY);
 
         transform.position = Vector3.Lerp(currentPos, nextPos, Speed * Time.deltaTime);
     }
 
     public void MovePlayerUp() {
-        float force = IsInPollutedArea ? UpwardDisplacement / 2 : UpwardDisplacement;
-        rb.AddForce(Vector2.up * force);
+        //float force = IsInPollutedArea ? UpwardDisplacement / 2 : UpwardDisplacement;
+        //rb.AddForce(Vector2.up * force);
+        Vector2 currentPos = transform.position;
+        float nextPosY = (IsInPollutedArea ? currentPos.y * UpwardDisplacement / 2 : currentPos.y * UpwardDisplacement);
+
+        Vector2 nextPos = new Vector3(currentPos.x, nextPosY);
+
+        transform.position = Vector3.Lerp(currentPos, nextPos, Speed * Time.deltaTime);
     }
 
     void HasEnteredPollutedArea() {
@@ -146,23 +159,30 @@ public class PlayerMovement : MonoBehaviour
                                     horizontalAxis > 0 ? Direction.RIGHT : Direction.LEFT;
     }
 
-    //public void ChangeVerticalDirection(bool isGoingUp)
-    //{
-    //    if (isGoingUp)
-    //        MovePlayerUp();
-    //    //else rb.gravityScale = .5f;
-    //    //PlayerVerticalDirection = isGoingUp ? Direction.UP : Direction.DOWN;
-    //    //IsResting = isGoingUp ? false : IsResting;
-    //}
+    public void ChangeVerticalDirection(bool isGoingUp)
+    {
+        //if (isGoingUp)
+        //    MovePlayerUp();
+        //else rb.gravityScale = .5f;
+        PlayerVerticalDirection = isGoingUp ? Direction.UP : Direction.DOWN;
+        IsResting = isGoingUp ? false : IsResting;
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.transform.tag == "Ground" || collision.transform.tag == "MaleFlower"
+            || collision.transform.tag == "FemaleFlower" || collision.transform.tag == "Hive"
+            )
+        {
+            Debug.Log("Hitting ground");
+            IsResting = true;
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!GameManager.Instance.IsGamePlaying())
             return;
-        if (collision.transform.tag == "Ground")
-        {
-            IsResting = true;
-        }
 
         if (!IsPolinated() && (collision.transform.tag == "RainUnit" || collision.transform.tag == "Mutant"))
         {
@@ -199,13 +219,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //private void OnCollisionExit2D(Collision2D collision)
-    //{
-    //    if (collision.transform.tag == "Ground")
-    //    {
-    //        IsResting = false;
-    //    }
-    //}
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        IsResting = false;
+    }
 
     public bool IsPolinated()
     {

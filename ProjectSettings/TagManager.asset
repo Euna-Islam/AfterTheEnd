@@ -12,6 +12,7 @@ TagManager:
   - Shed
   - Soil
   - Mutant
+  - Hive
   layers:
   - Default
   - TransparentFX
