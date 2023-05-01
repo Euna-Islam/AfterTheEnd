@@ -15,9 +15,17 @@ public class MutantBeeEnemyController : MonoBehaviour
         
     }
 
+    private void Update()
+    {
+        if (PlayerMovement.Instance.IsPolinated())
+            gameObject.SetActive(false);
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!GameManager.Instance.IsGamePlaying())
+            return;
         Vector2 newPos = Player.transform.position;
         transform.position = Vector2.MoveTowards(transform.position, newPos, Speed * Time.deltaTime);
 

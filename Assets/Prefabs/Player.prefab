@@ -136,9 +136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a376e1ce78dd8294cb19f9b21c7f56ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HorizontalDisplacement: 0.1
-  UpwardDisplacement: 0.2
-  DownwardDisplacement: 0.15
+  HorizontalDisplacement: 0.05
+  UpwardDisplacement: 0.05
+  DownwardDisplacement: 0.05
   Speed: 20
   PlayerHorizontalDirection: 1
   PlayerVerticalDirection: 0

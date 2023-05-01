@@ -79,8 +79,14 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         FlipPlayer();
-        MovePlayer();
+        
         HasEnteredPollutedArea();
+    }
+
+    private void FixedUpdate()
+    {
+        if(GameManager.Instance.IsGamePlaying())
+            MovePlayer();
     }
 
     void MovePlayer()
@@ -112,8 +118,9 @@ public class PlayerMovement : MonoBehaviour
                 (IsInPollutedArea ? currentPos.y + UpwardDisplacement / 2 : currentPos.y + UpwardDisplacement);
         }
         Vector2 nextPos = new Vector3(nextPosX, nextPosY);
-
-        transform.position = Vector3.Lerp(currentPos, nextPos, Speed * Time.deltaTime);
+        //rb.velocity = new Vector2(nextPosX, nextPosY);
+        rb.MovePosition(nextPos);
+        //transform.position = Vector3.Lerp(currentPos, nextPos, Speed * Time.deltaTime);
     }
 
     public void MovePlayerUp() {
