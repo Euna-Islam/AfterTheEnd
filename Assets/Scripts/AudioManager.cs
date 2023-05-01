@@ -50,12 +50,12 @@ public class AudioManager : MonoBehaviour
 
     public void PlayBackgroundMusic3()
     {
-        BackgroundMusic4.volume = 1;
+        StartCoroutine(PlayLevel3Music());
     }
 
     IEnumerator PlayLevel3Music()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         BackgroundMusic4.volume += .1f;
 
         if (BackgroundMusic4.volume == 1)
