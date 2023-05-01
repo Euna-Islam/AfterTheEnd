@@ -188,7 +188,7 @@ public class PlayerMovement : MonoBehaviour
         {
             ActivateDeadAnim();
             GameManager.Instance.GameOver();
-            
+            //SoundEffectManager.Instance.PlayEffect(0);
         }
 
 
@@ -196,6 +196,7 @@ public class PlayerMovement : MonoBehaviour
         {
             PollenCollectionState = PollenState.COLLECTED;
             collision.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            //SoundEffectManager.Instance.PlayEffect(1);
         }
 
         if (collision.transform.tag == "FemaleFlower" && PollenCollectionState == PollenState.COLLECTED)
@@ -206,6 +207,7 @@ public class PlayerMovement : MonoBehaviour
                             GameManager.Instance.IsGamePlaying())
                 GameManager.Instance.GenerateCleanWorld();
             IsInPollutedArea = false;
+            //SoundEffectManager.Instance.PlayEffect(2);
         }
     }
 
