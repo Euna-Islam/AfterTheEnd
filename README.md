@@ -5,4 +5,4 @@ Contributors: <br>
 Game Design, Level Design & Art Design: Ahmed Pasha Faisal<br>
 Narration & Development: Euna Islam
 
-Soung Effect/Music: Collected<br>
+Sound Effect/Music: Collected<br>
