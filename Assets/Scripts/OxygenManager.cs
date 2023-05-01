@@ -5,40 +5,47 @@ public class OxygenManager : MonoBehaviour
 {
     private static OxygenManager instance;
     public static OxygenManager Instance { get { return instance; } }
+
+    public float OxygenLossRate;
+    public float OxygenGainRate;
+
+    public Image OxygenLevel;
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(this);
         }
     }
-    public Image OxygenLevel;
-    private void Update()
-    {
-        UpdateOxygenIndicator();
-    }
 
     public void Reset()
     {
         OxygenLevel.fillAmount = 1;
+        CancelInvoke("UpdateOxygenIndicator");
+        InvokeRepeating("UpdateOxygenIndicator", 0.5f, 0.5f);
     }
 
     void UpdateOxygenIndicator()
     {
-        float oxygenLossRate = 0.0005f;
-        float oxygenGainRate = 0.0005f;
+        if (PlayerMovement.Instance.IsPolinated()) {
+            CancelInvoke("UpdateOxygenIndicator");
+            return;
+        }
+            
         if (PlayerMovement.Instance.IsInPollutedArea)
-            OxygenLevel.fillAmount -= oxygenLossRate;
-        else OxygenLevel.fillAmount += oxygenGainRate;
+            OxygenLevel.fillAmount -= OxygenLossRate;
+        //else OxygenLevel.fillAmount += OxygenGainRate;
 
         if (GameManager.Instance.IsGamePlaying() && OxygenLevel.fillAmount < .1)
         {
+            PlayerMovement.Instance.ActivateDeadAnim();
             GameManager.Instance.GameOver();
+            
         }
 
     }

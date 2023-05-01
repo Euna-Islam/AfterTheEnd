@@ -8,6 +8,8 @@ public class PlayerInput : MonoBehaviour
     }
 
     void TakePlayerInput() {
+        if (!GameManager.Instance.IsGamePlaying())
+            return;
         float x = Input.GetAxis("Horizontal");
         PlayerMovement.Instance.ChangeHorizontalDirection(x);
 

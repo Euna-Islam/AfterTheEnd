@@ -26,9 +26,6 @@ public class PlayerMovement : MonoBehaviour
     public Direction PlayerHorizontalDirection;
     public Direction PlayerVerticalDirection;
 
-    /// <summary>
-    /// to be removed lated
-    /// </summary>
     public SpriteRenderer PlayerSprite;
 
     public bool IsInPollutedArea, IsResting;
@@ -45,23 +42,27 @@ public class PlayerMovement : MonoBehaviour
     public PollenState PollenCollectionState;
 
     Vector3 InitialPosition;
+
+    public Animator BeeAnim;
+
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(this);
         }
+
+        InitialPosition = transform.position;
     }
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        InitialPosition = transform.position;
         Reset();
     }
 
@@ -75,12 +76,16 @@ public class PlayerMovement : MonoBehaviour
         transform.position = InitialPosition;
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         FlipPlayer();
-        if(!IsResting)
-            MovePlayer();
+        
         HasEnteredPollutedArea();
+    }
+
+    private void FixedUpdate()
+    {
+        MovePlayer();
     }
 
     void MovePlayer()
@@ -99,25 +104,54 @@ public class PlayerMovement : MonoBehaviour
                 nextPosX = currentPos.x;
                 break;
         }
-        float nextPosY = PlayerVerticalDirection == Direction.DOWN ?
-            currentPos.y - DownwardDisplacement : 
-            (IsInPollutedArea ? currentPos.y + UpwardDisplacement/2 : currentPos.y + UpwardDisplacement);
 
-        
+        float nextPosY = currentPos.y;
+        // Does the ray intersect any objects excluding the player layer
+        if (GameManager.Instance.IsGameOver())
+        {
+            nextPosX = currentPos.x;
+            nextPosY = currentPos.y - DownwardDisplacement;
+        }
+        else
+        {
+            nextPosY = PlayerVerticalDirection == Direction.DOWN ? currentPos.y - DownwardDisplacement :
+                (IsInPollutedArea ? currentPos.y + UpwardDisplacement / 2 : currentPos.y + UpwardDisplacement);
+        }
         Vector2 nextPos = new Vector3(nextPosX, nextPosY);
+        //rb.velocity = new Vector2(nextPosX, nextPosY);
+        rb.MovePosition(nextPos);
+        //transform.position = Vector3.Lerp(currentPos, nextPos, Speed * Time.deltaTime);
+    }
+
+    public void MovePlayerUp() {
+        //float force = IsInPollutedArea ? UpwardDisplacement / 2 : UpwardDisplacement;
+        //rb.AddForce(Vector2.up * force);
+        Vector2 currentPos = transform.position;
+        float nextPosY = (IsInPollutedArea ? currentPos.y * UpwardDisplacement / 2 : currentPos.y * UpwardDisplacement);
+
+        Vector2 nextPos = new Vector3(currentPos.x, nextPosY);
 
         transform.position = Vector3.Lerp(currentPos, nextPos, Speed * Time.deltaTime);
     }
 
     void HasEnteredPollutedArea() {
 
-        if (transform.position.y <= GameManager.Instance.PollutedAreaHeight)
+        if (transform.position.y <= GameManager.Instance.PollutedAreaHeight && !IsPolinated())
         {
             IsInPollutedArea = true;
+            BeeAnim.SetBool("IsBeeHurt", true);
         }
         else {
             IsInPollutedArea = false;
+            BeeAnim.SetBool("IsBeeHurt", false);
         }
+
+        if (IsInPollutedArea)
+        {
+            SoundEffectManager.Instance.PlayPolution();
+        }
+        else SoundEffectManager.Instance.StopEffect();
+
     }
 
 
@@ -142,42 +176,80 @@ public class PlayerMovement : MonoBehaviour
 
     public void ChangeVerticalDirection(bool isGoingUp)
     {
+        //if (isGoingUp)
+        //    MovePlayerUp();
+        //else rb.gravityScale = .5f;
         PlayerVerticalDirection = isGoingUp ? Direction.UP : Direction.DOWN;
         IsResting = isGoingUp ? false : IsResting;
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.transform.tag == "Ground" || collision.transform.tag == "MaleFlower"
+            || collision.transform.tag == "FemaleFlower" || collision.transform.tag == "Hive"
+            )
+        {
+            IsResting = true;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!GameManager.Instance.IsGamePlaying())
             return;
-        if (collision.transform.tag == "Ground")
-        {
-            IsResting = true;
 
-            if(PollenCollectionState == PollenState.DELIVERED)
-                GameManager.Instance.GrowForest();
+        if (!IsPolinated() && (collision.transform.tag == "RainUnit" || collision.transform.tag == "Mutant"))
+        {
+            ActivateDeadAnim();
+            GameManager.Instance.GameOver();
+            //SoundEffectManager.Instance.PlayEffect(0);
         }
+
+
         if (collision.transform.tag == "MaleFlower")
         {
             PollenCollectionState = PollenState.COLLECTED;
-            collision.gameObject.SetActive(false);
+            collision.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            if (PlayerLevelController.Instance.CurrentLevel == 1)
+                GameManager.Instance.GetComponent<TutorialManager>().DisableCollect();
+            //SoundEffectManager.Instance.PlayEffect(1);
         }
 
         if (collision.transform.tag == "FemaleFlower" && PollenCollectionState == PollenState.COLLECTED)
         {
-            collision.gameObject.SetActive(false);
+            collision.gameObject.transform.GetChild(0).gameObject.SetActive(true);
             PollenCollectionState = PollenState.DELIVERED;
-//            GameManager.Instance.GrowForest();
+            if (PollenCollectionState == PollenState.DELIVERED &&
+                            GameManager.Instance.IsGamePlaying())
+                GameManager.Instance.GenerateCleanWorld();
+            IsInPollutedArea = false;
+            //SoundEffectManager.Instance.PlayEffect(2);
         }
     }
 
-    //private void OnCollisionExit2D(Collision2D collision)
-    //{
-    //    if (collision.transform.tag == "Ground")
-    //    {
-    //        IsResting = false;
-    //    }
-    //}
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.transform.tag == "Finish" && GameManager.Instance.IsGamePlaying()
+            && IsPolinated())
+        {
+            collision.transform.gameObject.SetActive(false);
+            GameManager.Instance.IncreasePlayerLevel();
+            gameObject.SetActive(false);
+        }
+    }
 
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        IsResting = false;
+    }
+
+    public bool IsPolinated()
+    {
+        return PollenCollectionState == PollenState.DELIVERED;
+    }
+
+    public void ActivateDeadAnim() {
+        BeeAnim.SetBool("IsDead", true);
+    }
 
 }
