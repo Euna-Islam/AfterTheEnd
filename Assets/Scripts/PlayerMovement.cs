@@ -24,11 +24,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public Direction PlayerHorizontalDirection;
-    public Direction PlayerVerticalDirection;
+    //public Direction PlayerVerticalDirection;
 
-    /// <summary>
-    /// to be removed lated
-    /// </summary>
     public SpriteRenderer PlayerSprite;
 
     public bool IsInPollutedArea, IsResting;
@@ -46,10 +43,6 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 InitialPosition;
 
-    public bool IsPolinated()
-    {
-        return PollenCollectionState == PollenState.DELIVERED;
-    }
     void Awake()
     {
         if (instance == null)
@@ -67,25 +60,24 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
         Reset();
     }
 
     public void Reset()
     {
         PlayerHorizontalDirection = Direction.RIGHT;
-        PlayerVerticalDirection = Direction.DOWN;
+        //PlayerVerticalDirection = Direction.DOWN;
         IsInPollutedArea = false;
         IsResting = true;
         PollenCollectionState = PollenState.NOT_COLLECTED;
         transform.position = InitialPosition;
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         FlipPlayer();
-        if(!IsResting)
-            MovePlayer();
+        MovePlayer();
         HasEnteredPollutedArea();
     }
 
@@ -105,14 +97,18 @@ public class PlayerMovement : MonoBehaviour
                 nextPosX = currentPos.x;
                 break;
         }
-        float nextPosY = PlayerVerticalDirection == Direction.DOWN ?
-            currentPos.y - DownwardDisplacement : 
-            (IsInPollutedArea ? currentPos.y + UpwardDisplacement/2 : currentPos.y + UpwardDisplacement);
+        //float nextPosY = PlayerVerticalDirection == Direction.DOWN ?
+        //    currentPos.y - DownwardDisplacement : 
+        //    (IsInPollutedArea ? currentPos.y + UpwardDisplacement/2 : currentPos.y + UpwardDisplacement);
 
-        
-        Vector2 nextPos = new Vector3(nextPosX, nextPosY);
+        Vector2 nextPos = new Vector3(nextPosX, currentPos.y);
 
         transform.position = Vector3.Lerp(currentPos, nextPos, Speed * Time.deltaTime);
+    }
+
+    public void MovePlayerUp() {
+        float force = IsInPollutedArea ? UpwardDisplacement / 2 : UpwardDisplacement;
+        rb.AddForce(Vector2.up * force);
     }
 
     void HasEnteredPollutedArea() {
@@ -146,11 +142,14 @@ public class PlayerMovement : MonoBehaviour
                                     horizontalAxis > 0 ? Direction.RIGHT : Direction.LEFT;
     }
 
-    public void ChangeVerticalDirection(bool isGoingUp)
-    {
-        PlayerVerticalDirection = isGoingUp ? Direction.UP : Direction.DOWN;
-        IsResting = isGoingUp ? false : IsResting;
-    }
+    //public void ChangeVerticalDirection(bool isGoingUp)
+    //{
+    //    if (isGoingUp)
+    //        MovePlayerUp();
+    //    //else rb.gravityScale = .5f;
+    //    //PlayerVerticalDirection = isGoingUp ? Direction.UP : Direction.DOWN;
+    //    //IsResting = isGoingUp ? false : IsResting;
+    //}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -190,6 +189,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.transform.tag == "Finish" && GameManager.Instance.IsGamePlaying()
             && IsPolinated())
         {
+            gameObject.SetActive(false);
             GameManager.Instance.IncreasePlayerLevel();
         }
     }
@@ -202,5 +202,9 @@ public class PlayerMovement : MonoBehaviour
     //    }
     //}
 
+    public bool IsPolinated()
+    {
+        return PollenCollectionState == PollenState.DELIVERED;
+    }
 
 }
