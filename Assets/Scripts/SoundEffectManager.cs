@@ -26,12 +26,14 @@ public class SoundEffectManager : MonoBehaviour
 
     public void PlayPolution()
     {
-        PollutionSource.Play();
+        if(!PollutionSource.isPlaying)
+            PollutionSource.Play();
     }
 
     public void StopEffect()
     {
-        //PollutionSource.Stop();
+        if (PollutionSource.isPlaying)
+            PollutionSource.Stop();
     }
 
     public void PlayDeath()
