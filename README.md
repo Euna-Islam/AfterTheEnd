@@ -1,6 +1,8 @@
 # AfterTheEnd
 Made in Ludum Dare 53
 
-Contributors: 
-Game, Level and Art Design: Ahmed Pasha Faisal
+Contributors: <br>
+Game Design, Level Design & Art Design: Ahmed Pasha Faisal<br>
 Narration & Development: Euna Islam
+
+Soung Effect/Music: Collected<br>
