@@ -395,6 +395,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CleanGround
       objectReference: {fileID: 0}
+    - target: {fileID: 393740417093477, guid: 90adeb741f37c4ee9b859e5b1e1c5881, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 393740417093478, guid: 90adeb741f37c4ee9b859e5b1e1c5881, type: 3}
       propertyPath: m_Color.a
       value: 0
@@ -4810,6 +4814,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground
       objectReference: {fileID: 0}
+    - target: {fileID: 2080669313797576610, guid: 6212e97969c12450f83fc809e9976ff1, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6212e97969c12450f83fc809e9976ff1, type: 3}
 --- !u!4 &1082802415 stripped
@@ -6408,7 +6416,7 @@ GameObject:
   - component: {fileID: 1761764222}
   m_Layer: 0
   m_Name: BeeHive
-  m_TagString: Untagged
+  m_TagString: Hive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6715,10 +6723,12 @@ MonoBehaviour:
   DownwardDisplacement: 0.2
   Speed: 20
   PlayerHorizontalDirection: 1
+  PlayerVerticalDirection: 0
   PlayerSprite: {fileID: 0}
   IsInPollutedArea: 0
   IsResting: 0
   PollenCollectionState: 0
+  BeeAnim: {fileID: 0}
 --- !u!61 &1817204539
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7099,10 +7109,12 @@ MonoBehaviour:
   DownwardDisplacement: 0.2
   Speed: 20
   PlayerHorizontalDirection: 1
+  PlayerVerticalDirection: 0
   PlayerSprite: {fileID: 1780862327}
   IsInPollutedArea: 0
   IsResting: 0
   PollenCollectionState: 0
+  BeeAnim: {fileID: 0}
 --- !u!61 &1878332815
 BoxCollider2D:
   m_ObjectHideFlags: 0
