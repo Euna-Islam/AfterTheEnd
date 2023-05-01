@@ -44,13 +44,18 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        CleanGround.SetActive(false);
         Play();
     }
 
     private void Update()
     {
         if (CleaningSky)
+        {
             FadePollutedSky();
+            CleanGround.SetActive(true);
+        }
+            
     }
 
     public void GenerateCleanWorld()
@@ -120,6 +125,7 @@ public class GameManager : MonoBehaviour
     void SetCleanSky()
     {
         InvokeRepeating("FadePollutedSky", .1f, 1);
+        
     }
 
     void FadePollutedSky() {
@@ -139,8 +145,8 @@ public class GameManager : MonoBehaviour
             c = PollutedGround.GetComponent<SpriteRenderer>().color;
             PollutedGround.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, c.a -= alpha);
 
-            c = CleanGround.GetComponent<SpriteRenderer>().color;
-            CleanGround.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, c.a += alpha);
+            //c = CleanGround.GetComponent<SpriteRenderer>().color;
+            //CleanGround.GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, c.a += alpha);
 
 
             c = MaleFlower.GetComponent<SpriteRenderer>().color;
