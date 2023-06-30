@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 899e944a8dc9e55438ef5f229b701a1a
+  m_SerializeEntries:
+  - m_GUID: 0259e5fc14f42ff4893eb827241814e9
+    m_Address: Assets/Scenes/PersistantManagers.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e5f7e263a6052e54690d33fa82a37ae2
+    m_Address: Assets/Scenes/SplashScene.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: d375af079df75f44ebd365302e30b657, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 68db332bd1c05c04e9f3bcb46988e12b, type: 2}
+    - {fileID: 11400000, guid: fd42bb0ac13901547b157dfde9138af5, type: 2}
